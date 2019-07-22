@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+	   					   http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+						   http://code.alibabatech.com/schema/dubbo
+						   http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+    <dubbo:reference id="demoService" interface="com.dubbo.api.DemoService" mock="true" />
+
+    <dubbo:application name="dubbo-mock"/>
+
+    <!-- 使用zookeeper注册中心进行注册 -->
+    <dubbo:registry protocol="zookeeper" address="${zookeeper.address}" client="curator" />
+
+    <dubbo:consumer check="false" retries="2" timeout="3000"/>
+</beans>
